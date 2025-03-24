@@ -1,0 +1,24 @@
+.admin-layout {
+    min-height: 100vh;
+  }
+  
+  .sidebar {
+    width: 240px;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+  
+  .main-content {
+    overflow-x: auto;
+  }
+  
+  .dark-mode .sidebar {
+    background-color: #1e1e1e;
+  }
+  
+  .dark-mode .main-content {
+    background-color: #121212;
+    color: #eee;
+  }
+  
