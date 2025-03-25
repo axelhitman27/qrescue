@@ -32,6 +32,9 @@ const QRescueNavbar = () => {
               <Link className="nav-link" to="/health-info">Υγεία</Link>
             </li>
             <li className="nav-item">
+              <Link to="/register" className="nav-link">Εγγραφή</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/profile">👤 Το Προφίλ Μου</Link>
             </li>
             <li className="nav-item">

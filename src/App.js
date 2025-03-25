@@ -20,6 +20,8 @@ import UserProfilePage from "./profile/UserProfilePage";
 import QRProfilesPage from "./pages/admin/QRProfilesPage";
 import PrivateRoute from "./components/PrivateRoute";
 import QRPublicPage from "./pages/QRPublicPage";
+import RegisterPage from "./pages/RegisterPage";
+import AccountPage from "./pages/AccountPage";
 
 function App() {
   return (
@@ -52,6 +54,8 @@ function App() {
         <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/admin/qr-profiles" element={<QRProfilesPage />} />
         <Route path="/qr/:id" element={<QRPublicPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />
 
         {/* Admin Dashboard - μόνο αν είσαι logged in */}
         <Route
