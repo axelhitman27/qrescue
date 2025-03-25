@@ -26,7 +26,28 @@ const BuyPage = () => {
   const decrement = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
   const handleNext = () => {
-    setStep(step + 1);
+    if (step === 2) {
+      const isLoggedIn = !!localStorage.getItem("userToken");
+      const profile = JSON.parse(localStorage.getItem("qrescueProfile"));
+  
+      if (!isLoggedIn) {
+        alert("❌ Πρέπει να είστε συνδεδεμένοι για να προχωρήσετε στην αγορά.");
+        return;
+      }
+  
+      if (
+        !profile ||
+        !profile.name ||
+        !profile.bloodType ||
+        profile.name.trim() === "" ||
+        profile.bloodType.trim() === ""
+      ) {
+        alert("⚠️ Πρέπει πρώτα να συμπληρώσετε το προφίλ σας στο QRescue.");
+        return;
+      }
+    }
+  
+    setStep((prev) => prev + 1);
   };
 
   const renderProfileData = () => {

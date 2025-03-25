@@ -1,26 +1,66 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
-const FAQPage = () => {
+const faqData = [
+  {
+    question: "Τι είναι το QRescue;",
+    answer:
+      "Το QRescue είναι ένα αυτοκόλλητο QR που τοποθετείται στο κράνος και περιέχει κρίσιμες ιατρικές πληροφορίες για έκτακτη ανάγκη.",
+  },
+  {
+    question: "Ποιος μπορεί να το χρησιμοποιήσει;",
+    answer:
+      "Οποιοσδήποτε οδηγεί μηχανή, ποδήλατο ή σκούτερ, καθώς και επαγγελματίες διανομείς ή οδηγοί.",
+  },
+  {
+    question: "Πώς διασφαλίζονται τα προσωπικά δεδομένα μου;",
+    answer:
+      "Μπορείτε να επιλέξετε ποια στοιχεία θα εμφανίζονται στο QR και τα δεδομένα είναι προσβάσιμα μόνο με σάρωση.",
+  },
+  {
+    question: "Μπορώ να ενημερώσω τα στοιχεία μου μετά την αγορά;",
+    answer:
+      "Ναι, μπορείτε να συνδεθείτε στο λογαριασμό σας και να επεξεργαστείτε το προφίλ σας ανά πάσα στιγμή.",
+  },
+  {
+    question: "Τι περιλαμβάνει η παραγγελία;",
+    answer:
+      "Η παραγγελία περιλαμβάνει το QRescue αυτοκόλλητο με οδηγίες τοποθέτησης και ενεργοποίησης.",
+  },
+];
+
+const FaqItem = ({ question, answer }) => {
+  const { ref, inView } = useInView({ triggerOnce: true });
+
   return (
-    <div className="container py-5">
-      <h1 className="mb-4">Συχνές Ερωτήσεις</h1>
-
-      <h5>❓ Τι είναι το QRescue;</h5>
-      <p>Είναι ένα αυτοκόλλητο με QR code που τοποθετείται στο κράνος και περιέχει σημαντικές πληροφορίες υγείας και επικοινωνίας.</p>
-
-      <h5>❓ Πώς λειτουργεί;</h5>
-      <p>Σε περίπτωση ατυχήματος, οποιοσδήποτε μπορεί να σκανάρει τον κωδικό με το κινητό του και να δει τις πληροφορίες.</p>
-
-      <h5>❓ Είναι ανθεκτικό στις καιρικές συνθήκες;</h5>
-      <p>Ναι, είναι αδιάβροχο και ανθεκτικό στο φως και τη ζέστη.</p>
-
-      <h5>❓ Πώς διαχειρίζομαι τα στοιχεία μου;</h5>
-      <p>Μπορείς να τα ενημερώσεις μέσω ειδικής σελίδας μετά την ενεργοποίηση του QRescue.</p>
-
-      <Link to="/" className="btn btn-primary mt-4">🔙 Επιστροφή</Link>
-    </div>
+    <motion.div
+      ref={ref}
+      className="border rounded-3 mb-4 p-3 bg-white text-black"
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5 }}
+      style={{ borderColor: "#000" }}
+    >
+      <h5 className="fw-bold mb-2">{question}</h5>
+      <p className="mb-0">{answer}</p>
+    </motion.div>
   );
 };
 
-export default FAQPage;
+const FaqPage = () => {
+  return (
+      <>
+        <div className="container py-5" style={{ maxWidth: "800px" }}>
+          <h2 className="text-center mb-5 fw-bold text-black">❓ Συχνές Ερωτήσεις</h2>
+            {faqData.map((faq, idx) => (
+              <FaqItem key={idx} question={faq.question} answer={faq.answer} />
+              ))}
+      </div>
+    </>  
+  );
+};
+
+
+
+export default FaqPage;

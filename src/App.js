@@ -22,6 +22,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import QRPublicPage from "./pages/QRPublicPage";
 import RegisterPage from "./pages/RegisterPage";
 import AccountPage from "./pages/AccountPage";
+import HealthPage from "./pages/HealthPage";
 
 function App() {
   return (
@@ -50,12 +51,13 @@ function App() {
         <Route path="/faq" element={<PageLayout> <FAQPage /> </PageLayout>} />
         <Route path="/accidents" element={<PageLayout><AccidentsPage /></PageLayout>} />
         <Route path="/health-info" element={<PageLayout> <HealthInfoPage /></PageLayout>} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/profile" element={<UserProfilePage />} />
-        <Route path="/admin/qr-profiles" element={<QRProfilesPage />} />
+        <Route path="/login" element={<PageLayout> <LoginPage /></PageLayout>} />
+        <Route path="/profile" element={<PageLayout> <UserProfilePage /> </PageLayout>} />
+        <Route path="/admin/qr-profiles" element={<PageLayout>  <QRProfilesPage /> </PageLayout>} />
         <Route path="/qr/:id" element={<QRPublicPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register" element={<PageLayout> <RegisterPage /> </PageLayout>} />
         <Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />
+        <Route path="/health" element={<PageLayout><HealthPage /></PageLayout>} />
 
         {/* Admin Dashboard - μόνο αν είσαι logged in */}
         <Route
