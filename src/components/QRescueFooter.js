@@ -39,6 +39,7 @@ const QRescueFooter = () => {
               <li><Link to="/accidents" className="text-dark">Σε Περίπτωση Ατυχήματος</Link></li>
               <li><Link to="/health-info" className="text-dark">Πληροφορίες Υγείας</Link></li>
               <li><Link to="/faq" className="text-dark">Συχνές Ερωτήσεις</Link></li>
+              <li><Link to="/partners" className="text-dark">Συνεργαζόμενα Μέλη</Link></li>
             </ul>
           </div>
 

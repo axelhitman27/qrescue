@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { QRCodeSVG } from "qrcode.react";
 import productImage from "../assets/qrescue-sticker.jpg";
 import ShippingForm from "../components/ShippingForm";
+import FaqBubble from "../components/FaqBubble";
+
 
 
 const PRICE_PER_ITEM = 29.99;
@@ -76,7 +78,12 @@ const BuyPage = () => {
   };
 
   return (
+    <>
+
     <div className="container py-5">
+      <div className="col-md-12 text-center mb-4">
+      <FaqBubble />
+      </div>
       <h1 className="mb-4 text-center">Απόκτησε το QRescue</h1>
 
       <div className="row align-items-start">
@@ -163,6 +170,7 @@ const BuyPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

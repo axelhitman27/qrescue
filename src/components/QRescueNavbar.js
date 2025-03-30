@@ -1,8 +1,27 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import { Link , useNavigate } from "react-router-dom";
+
 
 const QRescueNavbar = () => {
+
+  const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("userToken");
+    setIsLoggedIn(!!token);
+  }, []);
+  
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("qrescueProfile");
+    setIsLoggedIn(false);
+    alert("🚪 Αποσυνδεθήκατε.");
+    navigate("/");
+  };
   return (
+    
     <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
       <div className="container">
         <Link className="navbar-brand fw-bold" to="/">
@@ -31,16 +50,32 @@ const QRescueNavbar = () => {
             <li className="nav-item">
               <Link to="/health" className="nav-link">Υγεία</Link>
             </li>
-            <li className="nav-item">
-              <Link to="/register" className="nav-link">Εγγραφή</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/profile">👤 Το Προφίλ Μου</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">Είσοδος</Link>
-            </li>
           </ul>
+          <ul className="navbar-nav">
+          {isLoggedIn ? (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/account">
+                  👤 Το Προφίλ Μου
+                </Link>
+              </li>
+              <li className="nav-item">
+                <button className="btn mt-3" onClick={handleLogout}>
+                  🚪 Αποσύνδεση
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/register">Εγγραφή</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">Σύνδεση</Link>
+              </li>
+            </>
+          )}
+        </ul>
         </div>
       </div>
     </nav>

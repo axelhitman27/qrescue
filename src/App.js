@@ -23,6 +23,10 @@ import QRPublicPage from "./pages/QRPublicPage";
 import RegisterPage from "./pages/RegisterPage";
 import AccountPage from "./pages/AccountPage";
 import HealthPage from "./pages/HealthPage";
+import PartnersPage from "./pages/PartnersPage";
+
+
+
 
 function App() {
   return (
@@ -58,6 +62,14 @@ function App() {
         <Route path="/register" element={<PageLayout> <RegisterPage /> </PageLayout>} />
         <Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />
         <Route path="/health" element={<PageLayout><HealthPage /></PageLayout>} />
+        <Route
+          path="/partners"
+          element={
+            <PageLayout>
+              <PartnersPage />
+            </PageLayout>
+          }
+        />
 
         {/* Admin Dashboard - μόνο αν είσαι logged in */}
         <Route
