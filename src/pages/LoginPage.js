@@ -18,7 +18,7 @@ const LoginPage = () => {
     if (email && password) {
       localStorage.setItem("userToken", "dummy-token");
       localStorage.setItem("userEmail", email);
-      navigate("/buy");
+      navigate("/");
     } else {
       alert("⚠️ Παρακαλώ συμπληρώστε email και κωδικό.");
     }
@@ -28,7 +28,7 @@ const LoginPage = () => {
     localStorage.removeItem("userToken");
     localStorage.removeItem("userEmail");
     setIsLoggedIn(false);
-    alert("🚪 Αποσυνδεθήκατε.");
+    alert("Αποσυνδεθήκατε.");
   };
 
   return (

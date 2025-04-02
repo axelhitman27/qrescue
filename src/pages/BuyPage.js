@@ -82,7 +82,7 @@ const BuyPage = () => {
 
     <div className="container py-5">
       <div className="col-md-12 text-center mb-4">
-      <FaqBubble />
+        <FaqBubble />
       </div>
       <h1 className="mb-4 text-center">Απόκτησε το QRescue</h1>
 
@@ -161,7 +161,6 @@ const BuyPage = () => {
                   value={`${window.location.origin}/qr/${qrId}`}
                   size={220}
                   level="H"
-                  includeMargin
                 />
               )}
               <p className="mt-3">🔗 <code>{`${window.location.origin}/qr/${qrId}`}</code></p>

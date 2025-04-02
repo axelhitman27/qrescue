@@ -42,12 +42,14 @@ const FaqBubble = () => {
       </div>
 
       <ul className="faq-bubble-list">
-        {questions.map((q) => (
-          <>
-            <li >• {q}</li>
-            <li >• {q}</li>
-          </>
-        ))}
+        {questions.map(({question,answer}) => {
+          return([
+            <>
+              <li key={question} classname="faq-bubble-question"><h4>{question}</h4></li>
+              <li key={answer} classname="faq-bubble-answer"><p>{answer}</p></li>
+            </>
+          ])
+        })}
       </ul>
     </div>
   );

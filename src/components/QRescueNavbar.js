@@ -61,7 +61,7 @@ const QRescueNavbar = () => {
               </li>
               <li className="nav-item">
                 <button className="btn mt-3" onClick={handleLogout}>
-                  🚪 Αποσύνδεση
+                  Αποσύνδεση
                 </button>
               </li>
             </>
