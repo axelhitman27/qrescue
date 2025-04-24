@@ -10,7 +10,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("userToken");
-    if (token) setIsLoggedIn(true);
+    if (!!token) setIsLoggedIn(true);
   }, []);
 
   const handleLogin = (e) => {
@@ -18,6 +18,7 @@ const LoginPage = () => {
     if (email && password) {
       localStorage.setItem("userToken", "dummy-token");
       localStorage.setItem("userEmail", email);
+      setIsLoggedIn(true);
       navigate("/");
     } else {
       alert("⚠️ Παρακαλώ συμπληρώστε email και κωδικό.");
@@ -59,7 +60,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary w-100">
+            <button type="submit" className="btn btn-primary w-100" onClick={handleLogin}>
               ✅ Σύνδεση
             </button>
           </form>

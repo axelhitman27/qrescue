@@ -25,20 +25,15 @@ const QRescueLanding = () => {
             σκαναριστεί για να εμφανίσει κρίσιμες πληροφορίες όπως επαφή,
             αλλεργίες και ομάδα αίματος.
           </p>
+          <div>
+            <p className="fw-bold mb-2">Δοκίμασε το QR:</p>
+            
           <img
             src={helmetImg}
             alt="Helmet with QRescue sticker"
             className="img-fluid mb-3"
-            style={{ maxWidth: "250px", borderRadius: "10px" }}
+            style={{ Width: "150px", height:"150px", borderRadius: "10px" ,background: "transparent"}}
           />
-          <div>
-            <p className="fw-bold mb-2">Δοκίμασε το QR:</p>
-            <img
-              src={qrCodeImg}
-              alt="QR Code Demo"
-              className="img-fluid"
-              style={{ width: "140px" }}
-            />
           </div>
         </motion.div>
 
@@ -51,6 +46,13 @@ const QRescueLanding = () => {
           transition={{ duration: 0.7 }}
         >
           <h2 className="mb-4">Απόκτησέ το Τώρα</h2>
+          <img
+              src={qrCodeImg}
+              alt="QR Code Demo"
+              className="img-fluid"
+              style={{ width: "140px", marginBottom: "20px", borderRadius: "10px" }}
+            />
+
           <a href="/buy" className="btn btn-success btn-lg">
             Buy Now
           </a>
