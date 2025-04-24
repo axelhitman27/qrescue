@@ -113,7 +113,7 @@ const BuyPage = () => {
               </div>
 
               <div className="mb-4">
-                <h5 className="mb-3">💳 Επιλογή Πληρωμής</h5>
+                <h5 className="mb-3">Επιλογή Πληρωμής</h5>
                 <div className="form-check">
                   <input className="form-check-input" type="radio" name="paymentMethod" value="stripe" checked={paymentMethod === "stripe"} onChange={(e) => setPaymentMethod(e.target.value)} id="stripe" />
                   <label className="form-check-label" htmlFor="stripe">💳 Πιστωτική / Χρεωστική (Stripe)</label>

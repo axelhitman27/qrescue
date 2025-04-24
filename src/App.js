@@ -24,6 +24,11 @@ import RegisterPage from "./pages/RegisterPage";
 import AccountPage from "./pages/AccountPage";
 import HealthPage from "./pages/HealthPage";
 import PartnersPage from "./pages/PartnersPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
+import TermsPage from "./pages/TermsPage";
+
+
+
 
 
 
@@ -48,9 +53,7 @@ function App() {
         {/* Δημόσιες σελίδες */}
         <Route path="/buy" element={
             <PageLayout> 
-              <PrivateRoute>
-                <BuyPage />
-              </PrivateRoute> 
+                <BuyPage /> 
             </PageLayout> } />
         <Route path="/faq" element={<PageLayout> <FAQPage /> </PageLayout>} />
         <Route path="/accidents" element={<PageLayout><AccidentsPage /></PageLayout>} />
@@ -62,6 +65,8 @@ function App() {
         <Route path="/register" element={<PageLayout> <RegisterPage /> </PageLayout>} />
         <Route path="/account" element={<PrivateRoute><AccountPage /></PrivateRoute>} />
         <Route path="/health" element={<PageLayout><HealthPage /></PageLayout>} />
+        <Route path="/forgot-password" element={<PageLayout><ForgotPasswordPage /></PageLayout>} />
+        <Route path="/terms" element={<PageLayout><TermsPage /></PageLayout>} />
         <Route
           path="/partners"
           element={

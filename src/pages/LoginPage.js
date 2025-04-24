@@ -59,7 +59,11 @@ const LoginPage = () => {
                 required
               />
             </div>
-
+            <div className="mb-3 text-end">
+              <a href="/forgot-password" className="text-muted small">
+                Ξεχάσατε τον κωδικό σας;
+              </a>
+            </div>
             <button type="submit" className="btn btn-primary w-100" onClick={handleLogin}>
               ✅ Σύνδεση
             </button>
