@@ -15,7 +15,7 @@ const RegisterPage = () => {
   });
 
   const allergyOptions = ["Γύρη", "Ξηροί καρποί", "Φάρμακα", "Τσίμπημα εντόμου"];
-
+  const diseasesOptions = ["Υπέρταση", "Σακχαρώδης Διαβήτης", "Καρδιαγγική Νόσος", "Χρόνια Αναπνευστική Νόσος", "Καρκίνος"];
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -107,19 +107,41 @@ const RegisterPage = () => {
         </div>
 
         <div className="mb-3">
-          <label>Αλλεργίες (επιλέξτε όσα ισχύουν)</label><br />
-          {allergyOptions.map((allergy) => (
-            <label key={allergy} className="me-3">
+          <label>Υποκείμενα Νοσήματα (επιλέξτε όσα ισχύουν)</label><br />
+          {diseasesOptions.map((disease) => (
+            <label key={disease} className="me-3">
               <input
                 type="checkbox"
-                name="allergies"
-                value={allergy}
-                checked={formData.allergies.includes(allergy)}
+                name="diseases"
+                value={disease}
+                checked={formData.allergies.includes(disease)}
                 onChange={handleChange}
               />{" "}
-              {allergy}
+              {disease}
             </label>
           ))}
+        </div>
+
+        <div className="mb-3">
+          <label>Ληφθείσα Φαρμακευτική Αγωγή</label>
+          <textarea
+            name="conditions"
+            className="form-control"
+            value={formData.conditions}
+            onChange={handleChange}
+            rows={3}
+          ></textarea>
+        </div>
+
+        <div className="mb-3">
+          <label>Δυσανεξία  σε Φαρμακευτικές Ουσίες</label>
+          <textarea
+            name="conditions"
+            className="form-control"
+            value={formData.conditions}
+            onChange={handleChange}
+            rows={3}
+          ></textarea>
         </div>
 
         <div className="mb-3">
@@ -133,15 +155,28 @@ const RegisterPage = () => {
           />
         </div>
 
+
         <div className="mb-3">
-          <label>Παθήσεις (π.χ. διαβήτης, άσθμα)</label>
-          <textarea
-            name="conditions"
+          <label>ΑΜΚΑ</label>
+          <input
+            type="text"
+            name="amka"
             className="form-control"
-            value={formData.conditions}
+            value={formData.amka}
             onChange={handleChange}
-            rows={3}
-          ></textarea>
+          />
+        </div>
+
+
+        <div className="mb-3">
+          <label>Αριθμός Κάρτα Αιμοδότη</label>
+          <input
+            type="text"
+            name="bloodDonorCard"
+            className="form-control"
+            value={formData.bloodDonorCard}
+            onChange={handleChange}
+          />
         </div>
 
         <button type="submit" className="btn btn-primary w-100">

@@ -116,15 +116,15 @@ const BuyPage = () => {
                 <h5 className="mb-3">Επιλογή Πληρωμής</h5>
                 <div className="form-check">
                   <input className="form-check-input" type="radio" name="paymentMethod" value="stripe" checked={paymentMethod === "stripe"} onChange={(e) => setPaymentMethod(e.target.value)} id="stripe" />
-                  <label className="form-check-label" htmlFor="stripe">💳 Πιστωτική / Χρεωστική (Stripe)</label>
+                  <label className="form-check-label" htmlFor="stripe">Πιστωτική / Χρεωστική (Stripe)</label>
                 </div>
                 <div className="form-check">
                   <input className="form-check-input" type="radio" name="paymentMethod" value="paypal" checked={paymentMethod === "paypal"} onChange={(e) => setPaymentMethod(e.target.value)} id="paypal" />
-                  <label className="form-check-label" htmlFor="paypal">🅿️ Πληρωμή με PayPal</label>
+                  <label className="form-check-label" htmlFor="paypal">Πληρωμή με PayPal</label>
                 </div>
               </div>
 
-              <button onClick={handleNext} className="btn btn-success w-100">➕ Συνέχεια στη Σύνοψη</button>
+              <button onClick={handleNext} className="btn btn-success w-50">Συνέχεια στη Σύνοψη</button>
             </div>
           )}
 
@@ -138,7 +138,7 @@ const BuyPage = () => {
               </ul>
               <h5 className="mt-4">🧾 Προσωπικά Στοιχεία για QR</h5>
               {renderProfileData()}
-              <button className="btn btn-primary w-100 mt-4" onClick={handleNext}>🚚 Συμπλήρωσε Στοιχεία Αποστολής</button>
+              <button className="btn btn-primary w-50 mt-4" onClick={handleNext}>Στοιχεία Αποστολής</button>
             </div>
           )}
 

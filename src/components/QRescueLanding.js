@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./QRescueLanding.css";
 
-import helmetImg from "../assets/helmet-qrescue.png";
+import helmetVideo from "../assets/video_helmet.mp4";
 import qrCodeImg from "../assets/qrescue-qr.png";
 import StatsSection from "../components/StatsSection";
 
@@ -12,39 +12,20 @@ const QRescueLanding = () => {
   return (
     <div className="qrescue-landing">
       {/* Hero Section */}
-      <div className="d-flex flex-column flex-md-row h-100">
+      <div className="d-flex flex-column flex-md-row">
         <motion.div
           className="left-section d-flex flex-column justify-content-center align-items-center text-center bg-white text-dark p-4"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
-        >
-          <h1 className="mb-3">QRescue</h1>
-          <p className="mb-4 px-3">
-            Έξυπνο αυτοκόλλητο για κράνος. Σε περίπτωση ατυχήματος, μπορεί να
-            σκαναριστεί για να εμφανίσει κρίσιμες πληροφορίες όπως επαφή,
-            αλλεργίες και ομάδα αίματος.
-          </p>
-          <div>
-            <p className="fw-bold mb-2">Δοκίμασε το QR:</p>
-            
-          <img
-            src={helmetImg}
-            alt="Helmet with QRescue sticker"
-            className="img-fluid mb-3"
-            style={{ Width: "150px", height:"150px", borderRadius: "10px" ,background: "transparent"}}
-          />
-          </div>
-        </motion.div>
-
-        <div className="divider d-none d-md-block"></div>
-
-        <motion.div
-          className="right-section d-flex flex-column justify-content-center align-items-center text-center bg-dark text-white p-4"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.7 }}
-        >
+        >  
+          <video
+            src={helmetVideo}
+            autoPlay
+            loop
+            muted
+            style={{ Width: "100%", height: "100%",objectFit:"contain" }}/>
+          
           <h2 className="mb-4">Απόκτησέ το Τώρα</h2>
           <img
               src={qrCodeImg}
