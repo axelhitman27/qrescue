@@ -1,9 +1,10 @@
 import React from "react";
+import VideoPage from "./VideoPage";
 import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./QRescueLanding.css";
 
-import helmetVideo from "../assets/video_helmet.mp4";
+
 import qrCodeImg from "../assets/qrescue-qr.png";
 import StatsSection from "../components/StatsSection";
 
@@ -14,18 +15,19 @@ const QRescueLanding = () => {
       {/* Hero Section */}
       <div className="d-flex flex-column flex-md-row">
         <motion.div
-          className="left-section d-flex flex-column justify-content-center align-items-center text-center bg-white text-dark p-4"
+          className="left-section d-flex flex-column justify-content-center align-items-center text-center bg-white text-dark"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7 }}
         >  
-          <video
-            src={helmetVideo}
-            autoPlay
-            loop
-            muted
-            style={{ Width: "100%", height: "100%",objectFit:"contain" }}/>
-          
+          <VideoPage/>
+        </motion.div>
+        <motion.div
+          className="left-section d-flex flex-column justify-content-center align-items-center text-center bg-white text-dark"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.7 }}
+        >  
           <h2 className="mb-4">Απόκτησέ το Τώρα</h2>
           <img
               src={qrCodeImg}

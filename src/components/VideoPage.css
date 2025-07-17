@@ -1,0 +1,11 @@
+.video-container {
+    overflow: hidden;
+    object-fit: cover;
+    position: relative;
+    margin: 0 auto;
+  }
+  .video-container video {
+    /* Make video to at least 100% wide and tall */
+    width: 100%;
+    height: 100%;
+  }
