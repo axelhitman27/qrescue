@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Components
@@ -34,6 +34,19 @@ import TermsPage from "./pages/TermsPage";
 
 
 function App() {
+
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const handleLogin = () => {
+    setIsLoggedIn(true); // Update login state
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Update login state
+  };
+
   return (
     <Router>
 
@@ -58,7 +71,7 @@ function App() {
         <Route path="/faq" element={<PageLayout> <FAQPage /> </PageLayout>} />
         <Route path="/accidents" element={<PageLayout><AccidentsPage /></PageLayout>} />
         <Route path="/health-info" element={<PageLayout> <HealthInfoPage /></PageLayout>} />
-        <Route path="/login" element={<PageLayout> <LoginPage /></PageLayout>} />
+        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         <Route path="/profile" element={<PageLayout> <UserProfilePage /> </PageLayout>} />
         <Route path="/admin/qr-profiles" element={<PageLayout>  <QRProfilesPage /> </PageLayout>} />
         <Route path="/qr/:id" element={<QRPublicPage />} />

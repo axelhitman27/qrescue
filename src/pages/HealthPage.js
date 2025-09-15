@@ -101,14 +101,6 @@ const HealthPage = () => {
         Πριν αποκτήσεις το QRescue, δες ποια στοιχεία είναι σημαντικό να γνωρίζεις και να δηλώσεις στο προφίλ σου.
       </p>
 
-      <a
-        href="#health-section"
-        className="btn btn-dark d-block mx-auto mb-5"
-        style={{ maxWidth: "220px" }}
-      >
-        Μάθε περισσότερα ⬇️
-      </a>
-
       <div id="health-section" className="row g-4 mb-5">
         {healthTips.map((tip, idx) => (
           <div className="col-md-6 col-lg-4" key={idx}>

@@ -1,11 +1,11 @@
 // ✅ BuyPage.js – Τελικό βήμα με QR Code SVG και μοναδικό ID
 import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { QRCodeSVG } from "qrcode.react";
 import productImage from "../assets/qrescue-sticker.jpg";
 import ShippingForm from "../components/ShippingForm";
 import FaqBubble from "../components/FaqBubble";
-
+import PersonalDetailsForm from "../components/PersonalDetailsForm";
+import "./BuyPage.css"; // Προσθήκη στυλ για το κουμπί
 
 
 const PRICE_PER_ITEM = 29.99;
@@ -27,55 +27,28 @@ const BuyPage = () => {
   const increment = () => setQuantity((q) => q + 1);
   const decrement = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
 
+  
+  
+
   const handleNext = () => {
-    if (step === 2) {
-      const isLoggedIn = !!localStorage.getItem("userToken");
-      const profile = JSON.parse(localStorage.getItem("qrescueProfile"));
+    // if (step === 2) {
+    //   const isLoggedIn = !!localStorage.getItem("userToken");
+    //   const profile = JSON.parse(localStorage.getItem("qrescueProfile"));
   
-      if (!isLoggedIn) {
-        alert("❌ Πρέπει να είστε συνδεδεμένοι για να προχωρήσετε στην αγορά.");
-        return;
-      }
-  
-      if (
-        !profile ||
-        !profile.name ||
-        !profile.bloodType ||
-        profile.name.trim() === "" ||
-        profile.bloodType.trim() === ""
-      ) {
-        alert("⚠️ Πρέπει πρώτα να συμπληρώσετε το προφίλ σας στο QRescue.");
-        return;
-      }
-    }
+    // }
   
     setStep((prev) => prev + 1);
   };
 
-  const renderProfileData = () => {
-    if (!profile || !profile.show) {
-      return <p className="text-muted">Δεν έχει συμπληρωθεί προφίλ.</p>;
-    }
+  // const handleSubmit = () => {
+  //   const id = uuidv4();
+  //   setQrId(id);
 
-    return (
-      <ul className="list-unstyled">
-        {profile.show.name && <li><strong>Όνομα:</strong> {profile.name}</li>}
-        {profile.show.bloodType && <li><strong>Ομάδα Αίματος:</strong> {profile.bloodType}</li>}
-        {profile.show.allergies && <li><strong>Αλλεργίες:</strong> {profile.allergies}</li>}
-        {profile.show.emergencyContact && <li><strong>Τηλ. Έκτακτης Ανάγκης:</strong> {profile.emergencyContact}</li>}
-      </ul>
-    );
-  };
+  //   // Αποθήκευση με ID (προσοχή: σε πραγματική εφαρμογή πρέπει να πάει σε backend)
+  //   localStorage.setItem(`qrProfile-${id}`, JSON.stringify(profile));
 
-  const handleSubmit = () => {
-    const id = uuidv4();
-    setQrId(id);
-
-    // Αποθήκευση με ID (προσοχή: σε πραγματική εφαρμογή πρέπει να πάει σε backend)
-    localStorage.setItem(`qrProfile-${id}`, JSON.stringify(profile));
-
-    setStep(4);
-  };
+  //   setStep(4);
+  // };
 
   return (
     <>
@@ -111,6 +84,17 @@ const BuyPage = () => {
                   <span className="ms-3 fw-bold">Σύνολο: {totalCost}€</span>
                 </div>
               </div>
+              <div className="mb-4">
+                <h5 className="mb-3">Προσωπικά Στοιχεία</h5>
+                <PersonalDetailsForm
+                  onSubmit={(data) => {
+                    setProfile(data); // Save the personal details in state
+                    localStorage.setItem("qrescueProfile", JSON.stringify(data)); // Save to localStorage
+                    handleNext(); // Proceed to the next step
+                  }}
+                  initialData={profile || {}} // Ensure initialData is always an object
+                />
+              </div>
 
               <div className="mb-4">
                 <h5 className="mb-3">Επιλογή Πληρωμής</h5>
@@ -136,20 +120,44 @@ const BuyPage = () => {
                 <li><strong>Πληρωμή:</strong> {paymentMethod === "stripe" ? "Stripe" : "PayPal"}</li>
                 <li><strong>Σύνολο:</strong> {totalCost}€</li>
               </ul>
-              <h5 className="mt-4">🧾 Προσωπικά Στοιχεία για QR</h5>
-              {renderProfileData()}
+              <h5 className="mt-4">🧾 Προσωπικά Στοιχεία</h5>
+              {profile ? (
+                <ul className="list-unstyled">
+                  <li><strong>Όνομα:</strong> {profile.name}</li>
+                  <li><strong>Ομάδα Αίματος:</strong> {profile.bloodType}</li>
+                  <li><strong>Αλλεργίες:</strong> {profile.allergies || "Καμία"}</li>
+                  <li><strong>Τηλέφωνο Έκτακτης Ανάγκης:</strong> {profile.emergencyContact}</li>
+                </ul>
+              ) : (
+                <p className="text-muted">Δεν έχουν συμπληρωθεί προσωπικά στοιχεία.</p>
+              )}
               <button className="btn btn-primary w-50 mt-4" onClick={handleNext}>Στοιχεία Αποστολής</button>
+
+              <button
+                    onClick={() => setStep(1)} // Go back to Step 2
+                    className="btn btn-secondary w-30 mt-4 mx-1"
+                  >
+                    Πίσω στην Παραγγελία
+                  </button>
             </div>
           )}
 
           {step === 3 && (
-            <ShippingForm
-                onSubmit={(data) => {
-                  setQrId(data.qrId);
-                  setStep(4);
-                }}
-              />
-          
+            <div>
+                <ShippingForm
+                        onSubmit={(data) => {
+                          setQrId(data.qrId);
+                          setStep(4);
+                        }}
+                      />
+
+                    <button
+                    onClick={() => setStep(2)} // Go back to Step 2
+                    className="btn btn-secondary w-50 mt-3"
+                  >
+                    Πίσω στη Σύνοψη
+                  </button>
+            </div>
           )}
 
           {step === 4 && (

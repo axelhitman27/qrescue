@@ -50,17 +50,15 @@ const QRescueNavbar = () => {
             <li className="nav-item">
               <Link to="/health" className="nav-link">Υγεία</Link>
             </li>
-          </ul>
-          <ul className="navbar-nav">
           {isLoggedIn ? (
             <>
               <li className="nav-item">
                 <Link className="nav-link" to="/account">
-                  👤 Το Προφίλ Μου
+                  Το Προφίλ Μου
                 </Link>
               </li>
               <li className="nav-item">
-                <button className="btn mt-3" onClick={handleLogout}>
+                <button className="btn mt-1" onClick={handleLogout}>
                   Αποσύνδεση
                 </button>
               </li>

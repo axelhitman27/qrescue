@@ -1,115 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import PersonalDetailsForm from "../components/PersonalDetailsForm";
 
 const AccountPage = () => {
   const [userData, setUserData] = useState(null);
 
-  const allergyOptions = ["Γύρη", "Ξηροί καρποί", "Φάρμακα", "Τσίμπημα εντόμου"];
-
+  // Load user data from localStorage or API
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("qrescueRegisteredUser"));
-    if (stored) {
-      setUserData(stored);
+    const storedData = localStorage.getItem("qrescueProfile");
+    if (storedData) {
+      setUserData(JSON.parse(storedData));
     }
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    if (type === "checkbox") {
-      setUserData((prev) => ({
-        ...prev,
-        allergies: checked
-          ? [...prev.allergies, value]
-          : prev.allergies.filter((a) => a !== value),
-      }));
-    } else {
-      setUserData((prev) => ({ ...prev, [name]: value }));
-    }
+  const handleFormSubmit = (updatedData) => {
+    // Save updated data to localStorage or send it to the backend
+    localStorage.setItem("qrescueProfile", JSON.stringify(updatedData));
+    setUserData(updatedData); // Update state with the new data
+    alert("Τα στοιχεία σας ενημερώθηκαν επιτυχώς!");
   };
 
-  const handleSave = () => {
-    localStorage.setItem("qrescueRegisteredUser", JSON.stringify(userData));
-    alert("✅ Το προφίλ σας ενημερώθηκε.");
-  };
-
-  if (!userData) return <p className="text-center py-5">Φόρτωση προφίλ...</p>;
+  if (!userData) {
+    return <p>Φόρτωση δεδομένων...</p>; // Show a loading message while data is being loaded
+  }
 
   return (
-    <div className="container py-5" style={{ maxWidth: "600px" }}>
-      <h2 className="mb-4 text-center">👤 Το Προφίλ Μου</h2>
-
-      <div className="mb-3">
-        <label>Email</label>
-        <input type="email" className="form-control" value={userData.email} disabled />
-      </div>
-
-      <div className="mb-3">
-        <label>Ονοματεπώνυμο</label>
-        <input
-          type="text"
-          name="name"
-          className="form-control"
-          value={userData.name}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="mb-3">
-        <label>Ομάδα Αίματος</label><br />
-        {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"].map((type) => (
-          <label key={type} className="me-3">
-            <input
-              type="radio"
-              name="bloodType"
-              value={type}
-              checked={userData.bloodType === type}
-              onChange={handleChange}
-            />{" "}
-            {type}
-          </label>
-        ))}
-      </div>
-
-      <div className="mb-3">
-        <label>Αλλεργίες</label><br />
-        {allergyOptions.map((a) => (
-          <label key={a} className="me-3">
-            <input
-              type="checkbox"
-              value={a}
-              checked={userData.allergies.includes(a)}
-              onChange={handleChange}
-            />{" "}
-            {a}
-          </label>
-        ))}
-      </div>
-
-      <div className="mb-3">
-        <label>Τηλέφωνο Έκτακτης Ανάγκης</label>
-        <input
-          type="tel"
-          name="emergencyContact"
-          className="form-control"
-          value={userData.emergencyContact}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="mb-3">
-        <label>Παθήσεις</label>
-        <textarea
-          name="conditions"
-          className="form-control"
-          rows={3}
-          value={userData.conditions}
-          onChange={handleChange}
-        ></textarea>
-      </div>
-
-      <button className="btn btn-success w-100" onClick={handleSave}>
-        💾 Αποθήκευση Αλλαγών
-      </button>
+    <div className="container py-5">
+      <h1 className="mb-4">Ο Λογαριασμός Μου</h1>
+      <PersonalDetailsForm
+        onSubmit={handleFormSubmit}
+        initialData={userData} // Pass existing data to the form
+      />
     </div>
   );
 };

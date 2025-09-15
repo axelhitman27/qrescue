@@ -13,6 +13,9 @@ const ShippingForm = ({ onSubmit }) => {
     email: "",
   });
 
+  const [errors, setErrors] = useState({}); // Track validation errors
+
+
   useEffect(() => {
     const stored = localStorage.getItem("shippingData");
     if (stored) setFormData(JSON.parse(stored));
@@ -23,24 +26,26 @@ const ShippingForm = ({ onSubmit }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.fullName.trim()) newErrors.fullName = "Το όνομα είναι υποχρεωτικό.";
+    if (!formData.address.trim()) newErrors.address = "Η διεύθυνση είναι υποχρεωτική.";
+    if (!formData.city.trim()) newErrors.city = "Η πόλη είναι υποχρεωτική.";
+    if (!/^[0-9]{5}$/.test(formData.postalCode)) newErrors.postalCode = "Η ταχυδρομική κωδικός πρέπει να έχει 5 ψηφία.";
+    if (!formData.phone.trim()) newErrors.phone = "Το τηλέφωνο είναι υποχρεωτικό.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Το email δεν είναι έγκυρο.";
+    return newErrors;
   };
 
-  const validatePostalCode = (code) => {
-    return /^[0-9]{5}$/.test(code);
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validateEmail(formData.email)) {
-      alert("⚠️ Το email δεν είναι έγκυρο.");
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
-    if (!validatePostalCode(formData.postalCode)) {
-      alert("⚠️ Η ταχυδρομική κωδικός πρέπει να έχει 5 ψηφία.");
-      return;
-    }
+    setErrors({});
     localStorage.setItem("shippingData", JSON.stringify(formData));
 
     // ✅ Δημιουργία QR ID εδώ και αποθήκευση προφίλ
@@ -60,90 +65,81 @@ const ShippingForm = ({ onSubmit }) => {
         <label>Ονοματεπώνυμο</label>
         <input
           type="text"
+          className={`form-control ${errors.fullName ? "is-invalid" : ""}`}
+          id="fullName"
           name="fullName"
-          className="form-control"
-          required
           value={formData.fullName}
           onChange={handleChange}
         />
+        {errors.fullName && <div className="invalid-feedback">{errors.fullName}</div>}
       </div>
 
       <div className="mb-3">
-        <label>Διεύθυνση</label>
+        <label htmlFor="address" className="form-label">Διεύθυνση</label>
         <input
           type="text"
+          className={`form-control ${errors.address ? "is-invalid" : ""}`}
+          id="address"
           name="address"
-          className="form-control"
-          required
           value={formData.address}
           onChange={handleChange}
         />
-      </div>
-
-      <div className="row">
-        <div className="col-md-6 mb-3">
-          <label>Πόλη</label>
-          <input
-            type="text"
-            name="city"
-            className="form-control"
-            required
-            value={formData.city}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="col-md-6 mb-3">
-          <label>Τ.Κ.</label>
-          <input
-            type="text"
-            name="postalCode"
-            className="form-control"
-            required
-            value={formData.postalCode}
-            onChange={handleChange}
-          />
-        </div>
+        {errors.address && <div className="invalid-feedback">{errors.address}</div>}
       </div>
 
       <div className="mb-3">
-        <label>Χώρα</label>
+        <label htmlFor="city" className="form-label">Πόλη</label>
         <input
           type="text"
-          name="country"
-          className="form-control"
-          required
-          value={formData.country}
+          className={`form-control ${errors.city ? "is-invalid" : ""}`}
+          id="city"
+          name="city"
+          value={formData.city}
           onChange={handleChange}
         />
+        {errors.city && <div className="invalid-feedback">{errors.city}</div>}
       </div>
 
       <div className="mb-3">
-        <label>Τηλέφωνο</label>
+        <label htmlFor="postalCode" className="form-label">Ταχυδρομικός Κώδικας</label>
         <input
-          type="tel"
+          type="text"
+          className={`form-control ${errors.postalCode ? "is-invalid" : ""}`}
+          id="postalCode"
+          name="postalCode"
+          value={formData.postalCode}
+          onChange={handleChange}
+        />
+        {errors.postalCode && <div className="invalid-feedback">{errors.postalCode}</div>}
+      </div>
+
+      <div className="mb-3">
+        <label htmlFor="phone" className="form-label">Τηλέφωνο</label>
+        <input
+          type="text"
+          className={`form-control ${errors.phone ? "is-invalid" : ""}`}
+          id="phone"
           name="phone"
-          className="form-control"
-          required
           value={formData.phone}
           onChange={handleChange}
         />
+        {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
       </div>
 
       <div className="mb-3">
-        <label>Email</label>
+        <label htmlFor="email" className="form-label">Email</label>
         <input
           type="email"
+          className={`form-control ${errors.email ? "is-invalid" : ""}`}
+          id="email"
           name="email"
-          className="form-control"
-          required
           value={formData.email}
           onChange={handleChange}
         />
+        {errors.email && <div className="invalid-feedback">{errors.email}</div>}
       </div>
 
-      <button type="submit" className="btn btn-primary w-100">
-        ✅ Ολοκλήρωση Παραγγελίας
-      </button>
+      <button type="submit" className="btn btn-primary">Υποβολή</button>
     </form>
   );
 };
